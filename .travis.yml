@@ -7,3 +7,15 @@ before_install:
 
 script:
     - docker run -e CI=true docker-react npm run test
+
+deploy:
+    provider: elasticbeanstalk
+    region: "us-west-2"             #aws region
+    app: "docker"                   #app name
+    env: "Docker-env"               #evnironment name
+    bucket_name: "get on aws"       #aws s3 bucket
+    bucket_path: "same as app name" #s3 bucket path
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY # environment variable in travis cli
+    secret_access_key: $AWS_SECRET_KEY # environment variable in travis cli
